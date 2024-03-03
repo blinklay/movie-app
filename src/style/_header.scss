@@ -1,0 +1,12 @@
+.header {
+  padding-top: $spacing-large;
+  &__wrapper {
+    padding: $spacing-small $spacing-medium;
+    background-color: rgba($color-gray, 0.6);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: $border-radius;
+  }
+}
