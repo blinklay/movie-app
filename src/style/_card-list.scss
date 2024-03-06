@@ -4,10 +4,6 @@
     grid-template-columns: repeat(4, 1fr);
     gap: $spacing-large;
   }
-
-  &__title {
-    margin-bottom: $spacing-medium;
-  }
 }
 
 .card {

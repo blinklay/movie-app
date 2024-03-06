@@ -1,0 +1,114 @@
+.slider {
+  margin-bottom: $spacing-large;
+
+  .swiper {
+    width: 70%;
+    position: relative;
+    img {
+      height: 100%;
+      object-fit: contain;
+    }
+    &-slide {
+      opacity: 0.4;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 0 10px !important;
+      transform: scale(0.9);
+      transition: $transition-duration;
+    }
+    &-slide-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    &-wrapper {
+      margin-bottom: 40px;
+      height: 500px;
+    }
+    &-button-next,
+    &-button-prev {
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background-color: $color-white;
+    }
+
+    &-pagination-bullet-active {
+      background-color: $color-accent;
+      transform: scale(1.4);
+    }
+  }
+}
+
+.slide {
+  position: relative;
+  &__poster {
+    height: 100%;
+    max-width: 100%;
+    background-color: $color-gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__top {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: $spacing-small;
+  }
+  &__rating {
+    padding: 5px 8px;
+    background-color: rgba($color-gray, 0.8);
+    border-radius: $border-radius;
+    font-size: 14px;
+    border: 1px solid rgba($color-accent, 0.6);
+  }
+  &__year {
+    padding: 5px 8px;
+    background-color: rgba($color-accent, 0.7);
+    border: 1px solid rgba($color-white, 0.6);
+    font-weight: bold;
+    border-radius: $border-radius;
+  }
+  &__bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: $spacing-small;
+    background-color: rgba($color-black, 0.8);
+    width: 100%;
+    backdrop-filter: blur(10px);
+  }
+
+  &__title {
+    margin-bottom: $spacing-small;
+  }
+
+  &__bottom-coutries {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 14px;
+    gap: 5px;
+  }
+
+  &__bottom-coutry {
+    padding: 3px 7px;
+    border: 1px solid $color-white;
+    border-radius: 6px;
+  }
+}
