@@ -28,13 +28,14 @@
 
   &__title {
     z-index: 2;
-    background-color: $color-gray;
     width: 100%;
     margin-top: auto;
     text-align: center;
     font-size: 18px;
     font-weight: normal;
-    padding: $spacing-small 0;
+    padding: $spacing-small;
+    background-color: rgba($color-black, 0.8);
+    backdrop-filter: blur(10px);
   }
 
   &__rating {

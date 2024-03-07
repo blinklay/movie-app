@@ -1,10 +1,12 @@
 import './index.html';
 import './index.scss';
 import { MainView } from './views/main/main';
+import { SearchView } from './views/search/search';
 
 class App {
   routes = [
-    { path: "", view: MainView }
+    { path: "", view: MainView },
+    { path: "#search", view: SearchView },
   ]
 
   constructor() {

@@ -18,7 +18,7 @@ export class Card extends DivComponent {
     <div class="card__poster">  
       <img src="${this.card.posterUrlPreview ? this.card.posterUrlPreview : noImage}" alt="Постер фильма">
     </div>
-    <div class="card__rating">${this.card.rating ? this.card.rating.toFixed(1) : "Без рейтинга"}</div>
+    <div class="card__rating">${parseFloat(this.card.rating) ? parseFloat(this.card.rating).toFixed(1) : "Без рейтинга"}</div>
     <h3 class="card__title">
       <span>${this.card.nameRu ? this.card.nameRu : this.card.nameEn}</span>
     </h3>

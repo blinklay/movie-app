@@ -25,7 +25,6 @@ export class Slider extends DivComponent {
     }
 
     this.el.innerHTML = `
-    <h2 class="slider__title title-second">Рекомендации</h2>
     <div id="swiper" class="swiper">
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-prev">

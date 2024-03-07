@@ -25,6 +25,10 @@ export class MainView extends AbstractView {
     this.loadSliderList()
   }
 
+  destroy() {
+    onChange.unsubscribe(this.state)
+  }
+
   stateHook(path) {
     if (path === 'list' || path === 'loading' || path === 'sliderList') {
       this.render()
@@ -35,7 +39,8 @@ export class MainView extends AbstractView {
     this.state.loading = true
 
     const data = await new DataBase().getData(this.#apiUrl + this.state.offset)
-    this.state.list = data.releases
+    const dataSec = await new DataBase().getData(this.#apiUrl + this.state.offset + 1)
+    this.state.list = [...data.releases, ...dataSec.releases]
 
     this.state.loading = false
   }
@@ -47,6 +52,15 @@ export class MainView extends AbstractView {
     this.state.loading = false
   }
 
+  setSectionTitle(obj) {
+    for (const sectionClass in obj) {
+      if (document.querySelector(sectionClass)) {
+        document.querySelector(sectionClass).insertAdjacentHTML('afterBegin',
+          `<h2 class="title-second">${obj[sectionClass]}</h2>`)
+      }
+    }
+  }
+
   render() {
     this.app.innerHTML = ""
     const main = document.createElement('div')
@@ -56,6 +70,10 @@ export class MainView extends AbstractView {
     main.append(new CardList(this.appState, this.state).render())
     this.renderHeader()
     this.app.append(main)
+    this.setSectionTitle({
+      ".card-list": "Последние релизы",
+      ".slider": "Рекомендации"
+    })
 
     slider.initSwiper()
   }
