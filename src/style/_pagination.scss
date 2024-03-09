@@ -1,0 +1,40 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  &__wrapper {
+    display: none;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__wrapper--show {
+    display: flex;
+  }
+
+  &__bullet {
+    background-color: $color-accent;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: $color-white;
+    font-weight: bold;
+  }
+
+  &__bullet--active {
+    transform: scale(0.9);
+    background-color: $color-gray;
+  }
+
+  &__btn {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

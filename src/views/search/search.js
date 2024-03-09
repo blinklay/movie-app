@@ -2,6 +2,7 @@ import { AbstractView } from "../../common/view";
 import { CardList } from "../../modules/card-list";
 import { DataBase } from "../../modules/data-base";
 import { Header } from "../../modules/header";
+import { Pagination } from "../../modules/pagination";
 import { Search } from "../../modules/search";
 import onChange from "on-change";
 export class SearchView extends AbstractView {
@@ -13,6 +14,7 @@ export class SearchView extends AbstractView {
     searchQuery: undefined,
     offset: 1,
     filmFound: 0,
+    pagesCount: 0
   }
 
   constructor(appState) {
@@ -23,7 +25,7 @@ export class SearchView extends AbstractView {
   }
 
   stateHook(path) {
-    if (path === 'searchQuery') {
+    if (path === 'searchQuery' || path === 'offset') {
       this.loadList(this.state.searchQuery)
     }
     if (path === 'list' || path === 'loading') {
@@ -33,10 +35,9 @@ export class SearchView extends AbstractView {
 
   async loadList(q) {
     this.state.loading = true
-
-    const data = await new DataBase().getData(`https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${q}&page=${this.state.offset}`)
-    console.log(data.films);
+    const data = await new DataBase().getData(`${this.#apiUrl}${q}&page=${this.state.offset}`)
     this.state.filmFound = data.searchFilmsCountResult
+    this.state.pagesCount = data.pagesCount
     this.state.list = data.films
 
     this.state.loading = false
@@ -51,8 +52,10 @@ export class SearchView extends AbstractView {
     main.append(new CardList(this.appState, this.state).render())
 
     if (this.state.list.length !== 0) {
+      main.append(new Pagination(this.state).render())
       main.querySelector('.card-list') ? main.querySelector('.card-list').insertAdjacentHTML('afterBegin', `<h2 class="title-second">Найдено фильмов: ${this.state.filmFound}</h2>`) : ""
     }
+
 
     this.app.append(main)
   }
