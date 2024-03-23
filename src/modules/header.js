@@ -37,6 +37,34 @@ export class Header extends DivComponent {
     </nav>
     `
     this.el.append(wrapper)
+    this.observeHeader()
     return this.el
+  }
+
+  observeHeader() {
+    const wrapper = this.el.querySelector('.header__wrapper')
+    const headerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // we get the height so that when adding a 
+        // class the layout does not “jump”
+
+        const headerHeight = this.el.clientHeight
+
+        if (!entry.isIntersecting) {
+          wrapper.classList.add('header--show')
+          wrapper.classList.add('header--sticky')
+          this.el.style.height = headerHeight + 'px'
+        } else {
+          wrapper.classList.remove('header--show')
+          wrapper.classList.remove('header--sticky')
+          this.el.style.height = 'auto'
+        }
+      })
+    }, {
+      threshold: 0,
+      rootMargin: '100%'
+    })
+
+    headerObserver.observe(this.el)
   }
 }

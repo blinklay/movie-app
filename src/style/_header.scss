@@ -3,11 +3,24 @@
   margin-bottom: $spacing-large;
   &__wrapper {
     padding: $spacing-small $spacing-large;
-    background-color: rgba($color-gray, 0.6);
+    background-color: rgba($color-gray, 0.9);
 
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 35px;
+
+    transition: $transition-duration;
+  }
+
+  &--sticky {
+    position: fixed;
+    max-width: 1120px;
+    width: 100%;
+    z-index: 5;
+  }
+
+  &--show {
+    animation: header-show 0.5s linear;
   }
 }
