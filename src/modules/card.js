@@ -12,7 +12,7 @@ export class Card extends DivComponent {
 
   render() {
     this.el = document.createElement('a')
-    this.el.href = this.card.filmId
+    this.el.href = `#film${this.card.filmId}`
     this.el.classList.add('card')
     this.el.innerHTML = `
     <div class="card__poster">  

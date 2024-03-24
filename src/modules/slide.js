@@ -8,7 +8,7 @@ export class Slide extends DivComponent {
 
   render() {
     this.el = document.createElement('a')
-    this.el.href = "#" + this.card.kinopoiskId
+    this.el.href = "#film" + this.card.kinopoiskId
     this.el.classList.add('swiper-slide')
     this.el.innerHTML = `
     <div class="slide__poster">

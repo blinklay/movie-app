@@ -56,7 +56,6 @@ export class SearchView extends AbstractView {
       main.querySelector('.card-list') ? main.querySelector('.card-list').insertAdjacentHTML('afterBegin', `<h2 class="title-second">Найдено фильмов: ${this.state.filmFound}</h2>`) : ""
     }
 
-
     this.app.append(main)
   }
 
