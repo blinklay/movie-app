@@ -73,12 +73,20 @@
   }
 
   &__favorites-btn {
-    max-width: 200px;
+    max-width: 220px;
     font-size: 16px;
     padding: 5px 8px;
     color: $color-white;
     background-color: $color-accent;
     border-radius: 4px;
     font-weight: bold;
+    transition: $transition-duration;
+    border: 2px solid transparent;
+  }
+
+  &__favorites-btn--active {
+    background-color: transparent;
+    color: $color-accent;
+    border: 2px solid $color-accent;
   }
 }

@@ -1,9 +1,14 @@
 import { DivComponent } from "../common/div-compoennt";
+import { LocalStorageFilm } from "./local-storage-film";
 
 export class FilmContent extends DivComponent {
+  #localKey = "films"
   constructor(state) {
     super()
     this.state = state
+    this.localStorageFilm = new LocalStorageFilm()
+    this.activeText = ""
+    this.activeClass = ""
   }
 
   render() {
@@ -12,8 +17,7 @@ export class FilmContent extends DivComponent {
       return this.el
     }
     this.el.classList.add('film')
-    const { posterUrl, nameRu, nameOriginal, genres, year, description, countries, ratingImdb, filmLength, hasImax, has3D, type } = this.state.currentFilm
-    console.log(genres);
+    const { posterUrl, nameRu, nameOriginal, genres, year, description, countries, ratingImdb, filmLength, hasImax, has3D, type, kinopoiskId } = this.state.currentFilm
 
     let genresComponent = ""
     for (let { genre } of genres) {
@@ -28,10 +32,11 @@ export class FilmContent extends DivComponent {
     }
 
     const movieType = {
-      "TV_SERIES": "Сериал",
-      "FILM": "Фильм"
+      "TV_SERIES": "ТВ Сериал",
+      "FILM": "Фильм",
+      "MINI_SERIES": 'Мини сериал'
     }
-
+    this.checkFavoritesState(kinopoiskId)
     this.el.innerHTML = `
         <div div class="film__poster" >
       <img class="film__poster-img" src="${posterUrl}" alt="Постер фильма">
@@ -73,13 +78,43 @@ export class FilmContent extends DivComponent {
           <td>${movieType[type]}</td>
         </tr>
       </table>
-      <button class="film__favorites-btn">
-        Добавить в избранное
+      <button class="film__favorites-btn ${this.activeClass}">
+        ${this.activeText}
       </button>
     </div>
       `
+
+    this.el.querySelector('.film__favorites-btn').addEventListener('click', (e) => {
+      const currentId = String(kinopoiskId)
+      this.activeClass = ""
+      this.activeText = ""
+
+      if (this.localStorageFilm.getData(this.#localKey).includes(currentId)) {
+        this.localStorageFilm.removeItem(this.#localKey, currentId)
+        e.target.classList.remove('film__favorites-btn--active')
+        this.activeText = "Добавить в избранное"
+      } else {
+        this.localStorageFilm.addItem(this.#localKey, currentId)
+        e.target.classList.add('film__favorites-btn--active')
+        this.activeText = "Удалить из избранного"
+      }
+
+      e.target.textContent = this.activeText
+      this.activeText = ""
+    })
     return this.el
   }
 
+  checkFavoritesState(kinopoiskId) {
+    const currentId = String(kinopoiskId)
+
+    if (this.localStorageFilm.getData(this.#localKey).includes(currentId)) {
+      this.activeClass = "film__favorites-btn--active"
+      this.activeText = "Удалить из избранного"
+    } else {
+      this.activeClass = ""
+      this.activeText = "Добавить в избранное"
+    }
+  }
 
 }
