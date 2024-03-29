@@ -9,8 +9,6 @@ export class CardList extends DivComponent {
   }
 
   render() {
-    // this.el.innerHTML = `<h2 class="card-list__title title-second">Последние релизы</h2>`
-
     if (this.state.loading) {
       this.el.classList.add('card-list__loader')
       const cards = document.createElement('div')
