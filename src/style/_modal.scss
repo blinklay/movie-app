@@ -1,0 +1,42 @@
+.modal {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: $color-gray;
+  padding: $spacing-small $spacing-medium;
+  border-radius: 6px;
+  transform: translateX(100%);
+  transition: $transition-duration;
+  &__body {
+    display: flex;
+    align-items: center;
+    gap: $spacing-medium;
+  }
+  &__indicator-line {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: $color-accent;
+    bottom: 0;
+    left: 0;
+
+    transform-origin: left;
+    animation: modal-indicator 2.5s linear forwards;
+  }
+  &__close-btn {
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgb(224, 40, 40);
+    border-radius: 4px;
+  }
+
+  &--show {
+    transform: translateX(0%);
+  }
+}

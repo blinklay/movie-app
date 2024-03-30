@@ -1,5 +1,6 @@
 import { DivComponent } from "../common/div-compoennt";
 import { LocalStorageFilm } from "./local-storage-film";
+import { Modal } from "./modal";
 
 export class FilmContent extends DivComponent {
   #localKey = "films"
@@ -93,10 +94,12 @@ export class FilmContent extends DivComponent {
         this.localStorageFilm.removeItem(this.#localKey, currentId)
         e.target.classList.remove('film__favorites-btn--active')
         this.activeText = "Добавить в избранное"
+        this.el.append(new Modal('Удалено из избранного!').render())
       } else {
         this.localStorageFilm.addItem(this.#localKey, currentId)
         e.target.classList.add('film__favorites-btn--active')
         this.activeText = "Удалить из избранного"
+        this.el.append(new Modal('Добавленно в избранное!').render())
       }
 
       e.target.textContent = this.activeText

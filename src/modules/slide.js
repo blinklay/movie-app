@@ -10,12 +10,13 @@ export class Slide extends DivComponent {
     this.el = document.createElement('a')
     this.el.href = "#film" + this.card.kinopoiskId
     this.el.classList.add('swiper-slide')
+    console.log(this.card);
     this.el.innerHTML = `
     <div class="slide__poster">
       <img class="slide__poster-img" src="${this.card.posterUrlPreview}">
     </div>
     <div class="slide__top">
-      <div class="slide__rating">${this.card.rating ? this.card.rating : 'Без рейтинга'}</div>
+      <div class="slide__rating">${this.card.ratingImdb ? this.card.ratingImdb : 'Без рейтинга'}</div>
       <div class="slide__year">${this.card.year}</div>
     </div>
     <div class="slide__bottom">

@@ -19,3 +19,13 @@
     opacity: 1;
   }
 }
+
+@keyframes modal-indicator {
+  0% {
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform: scaleX(0);
+  }
+}
